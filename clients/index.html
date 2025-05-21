@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notary.ru - Нотариальные услуги</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <!-- Шапка сайта -->
+    <header>
+        <div class="search-box">
+            <label for="search-input" class="visually-hidden">Поиск</label>
+            <input type="text" id="search-input" placeholder="Поиск...">
+            <button aria-label="Выполнить поиск"><i class="search-icon">🔍</i></button>
+        </div>
+
+        <h1 class="logo">Notary.ru</h1>
+
+        <div class="auth-buttons">
+            <button id="client-login">Вход для клиентов</button>
+            <button id="employee-login">Вход для сотрудников</button>
+            <button id="create-service-btn" class="employee-only">Создать документ</button>
+            <button id="employee-requests" class="employee-only">Заявки</button>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main>
+        <div class="services-section">
+            <h2>Наши услуги</h2>
+            <ul class="services-list">
+                <li>
+                    <span class="service-name">Удостоверение сделок</span>
+                    <span class="service-price">5 000 ₽</span>
+                </li>
+                <li>
+                    <span class="service-name">Выдача свидетельства о праве собственности на долю</span>
+                    <span class="service-price">3 500 ₽</span>
+                </li>
+                <li>
+                    <span class="service-name">Наложение и снятие запрещения отчуждения имущества</span>
+                    <span class="service-price">4 200 ₽</span>
+                </li>
+                <li>
+                    <span class="service-name">Свидетельствование верности копий документов и выписок из них</span>
+                    <span class="service-price">800 ₽</span>
+                </li>
+                <li>
+                    <span class="service-name">Свидетельствование подлинности подписи на документах</span>
+                    <span class="service-price">1 200 ₽</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="order-section">
+            <h2>Оформление заказа</h2>
+            <form id="order-form">
+                <div class="form-group">
+                    <label for="client-name">Название/ФИО:</label>
+                    <input type="text" id="client-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="client-activity">Вид деятельности:</label>
+                    <input type="text" id="client-activity">
+                </div>
+                <div class="form-group">
+                    <label for="client-address">Адрес:</label>
+                    <input type="text" id="client-address" required>
+                </div>
+                <div class="form-group">
+                    <label for="client-phone">Телефон:</label>
+                    <input type="tel" id="client-phone" required>
+                </div>
+
+                <div class="selected-services">
+                    <h3>Выбранные услуги</h3>
+                    <div id="services-container"></div>
+                    <div class="total">
+                        <p>Итого: <span id="total-amount">0</span> ₽</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Скидки:</label>
+                    <div id="discount-info">Доступные скидки будут рассчитаны автоматически</div>
+                    <small class="text-muted">Объемная скидка 20% при заказе от 10,000 ₽. Новым клиентам 10%</small>
+                </div>
+
+                <button type="submit" class="submit-btn">Завершить сделку</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Настройки администратора -->
+    <button id="admin-settings" class="admin-only">⚙️ Настройки</button>
+</div>
+
+<!-- Модальные окна -->
+<div id="login-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Вход в систему</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="login">Логин:</label>
+                <input type="text" id="login" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Войти</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно входа/регистрации клиента -->
+<div id="client-auth-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <!-- Вкладки -->
+        <div class="auth-tabs">
+            <button class="tab-btn active" data-tab="login">Вход</button>
+            <button class="tab-btn" data-tab="register">Регистрация</button>
+        </div>
+
+        <!-- Форма входа -->
+        <form id="client-login-form" class="auth-form active">
+            <div class="form-group">
+                <label for="client-login-email">Email:</label>
+                <input type="email" id="client-login-email" required>
+            </div>
+            <div class="form-group">
+                <label for="client-login-password">Пароль:</label>
+                <input type="password" id="client-login-password" required>
+            </div>
+            <button type="submit" class="submit-btn">Войти</button>
+        </form>
+
+        <!-- Форма регистрации -->
+        <form id="client-register-form" class="auth-form">
+            <div class="form-group">
+                <label for="client-reg-name">ФИО:</label>
+                <input type="text" id="client-reg-name" required>
+            </div>
+            <div class="form-group">
+                <label for="client-reg-email">Email:</label>
+                <input type="email" id="client-reg-email" required>
+            </div>
+            <div class="form-group">
+                <label for="client-reg-password">Пароль:</label>
+                <input type="password" id="client-reg-password" required>
+            </div>
+            <div class="form-group">
+                <label for="client-reg-phone">Телефон:</label>
+                <input type="tel" id="client-reg-phone" required>
+            </div>
+            <div class="form-group">
+                <label for="client-reg-address">Адрес:</label>
+                <input type="text" id="client-reg-address" required>
+            </div>
+            <button type="submit" class="submit-btn">Зарегистрироваться</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно входа для сотрудников -->
+<div id="admin-login-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Вход для сотрудников</h2>
+        <form id="admin-login-form">
+            <div class="form-group">
+                <label for="admin-login">Логин:</label>
+                <input type="text" id="admin-login" required>
+            </div>
+            <div class="form-group">
+                <label for="admin-password">Пароль:</label>
+                <input type="password" id="admin-password" required>
+            </div>
+            <button type="submit" class="submit-btn">Войти</button>
+        </form>
+    </div>
+</div>
+<!-- Модальное окно заявки на работу -->
+<div id="job-application-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Заявка на работу</h2>
+        <form id="application-form">
+            <div class="form-group">
+                <label for="applicant-name">ФИО:</label>
+                <input type="text" id="applicant-name" required>
+            </div>
+            <div class="form-group">
+                <label for="experience">Стаж работы (лет):</label>
+                <input type="number" id="experience" required>
+            </div>
+            <div class="form-group">
+                <label for="photo">Фото:</label>
+                <input type="file" id="photo" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="applicant-address">Адрес:</label>
+                <input type="text" id="applicant-address" required>
+            </div>
+            <div class="form-group">
+                <label for="applicant-phone">Телефон:</label>
+                <input type="tel" id="applicant-phone" required>
+            </div>
+            <button type="submit" class="submit-btn">Отправить заявку</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно настроек администратора -->
+<div id="admin-panel-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Панель администратора</h2>
+        <div class="admin-options">
+            <button id="database-btn" class="admin-btn">База данных</button>
+            <button id="employees-btn" class="admin-btn">Управление сотрудниками</button>
+        </div>
+
+        <!-- Секция базы данных -->
+        <div id="database-section" class="admin-section" style="display:none;">
+            <h3>База данных клиентов</h3>
+            <div id="clients-list" class="data-list"></div>
+        </div>
+
+        <!-- Секция управления сотрудниками -->
+        <div id="employees-section" class="admin-section" style="display:none;">
+            <h3>Заявки на работу</h3>
+            <div id="applications-list" class="data-list"></div>
+
+            <h3>Список сотрудников</h3>
+            <div id="employees-list" class="data-list"></div>
+            <div class="employee-controls">
+                <input type="number" id="employee-id" placeholder="ID сотрудника">
+                <button id="register-btn">Зарегистрировать</button>
+                <button id="delete-btn">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>
+
+<!-- Модальное окно создания документа -->
+<div id="service-document-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Оформление оказанной услуги</h2>
+        <form id="service-document-form">
+            <div class="form-group">
+                <label for="order-select">Выберите заказ:</label>
+                <select id="order-select" required>
+                    <option value="">Выберите заказ</option>
+                </select>
+            </div>
+
+            <div id="order-details" style="display: none;">
+                <h3>Детали заказа</h3>
+                <div id="order-info"></div>
+
+                <div class="form-group">
+                    <label for="response-text">Ответ клиенту:</label>
+                    <textarea id="response-text" required></textarea>
+                </div>
+
+                <button type="submit">Подтвердить выполнение</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="services-list-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Оказанные услуги</h2>
+        <div id="services-list-container">
+            <!-- Документы будут загружаться здесь -->
+        </div>
+    </div>
+</div>

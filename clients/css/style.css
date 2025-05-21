@@ -1,0 +1,548 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+}
+
+/* Шапка */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-box {
+    display: flex;
+    width: 250px;
+}
+
+.search-box input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+}
+
+.search-box button {
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#client-login {
+    background-color: #3498db;
+    color: white;
+}
+
+#employee-login {
+    background-color: #e67e22;
+    color: white;
+}
+
+#employee-requests {
+    background-color: #9b59b6;
+    color: white;
+    display: none;
+}
+
+/* Основное содержимое */
+main {
+    display: flex;
+    gap: 30px;
+}
+
+.services-section {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.services-section h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.services-list {
+    list-style: none;
+}
+
+.services-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.services-list li:hover {
+    background-color: #f9f9f9;
+}
+
+.service-name {
+    flex-grow: 1;
+}
+
+.service-price {
+    font-weight: bold;
+    color: #27ae60;
+    margin-left: 15px;
+}
+
+.order-section {
+    flex: 1;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.order-section h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-group select[multiple] {
+    height: auto;
+    min-height: 100px;
+}
+
+.selected-services {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.selected-services h3 {
+    margin-bottom: 10px;
+}
+
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.total {
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #219653;
+}
+
+/* Модальные окна */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Кнопка настроек */
+#admin-settings {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #34495e;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    main {
+        flex-direction: column;
+    }
+
+    .auth-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .auth-buttons button {
+        flex-grow: 1;
+    }
+}
+/* Стили для выбранных услуг */
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.service-info {
+    flex-grow: 1;
+}
+
+.service-total {
+    font-weight: bold;
+    margin-left: 15px;
+    min-width: 80px;
+    display: inline-block;
+    text-align: right;
+}
+
+.remove-service {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    padding: 0 8px;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.remove-service:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Стили для информации о скидках */
+#discount-info {
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+/* Стили для заявки на работу */
+#application-form .form-group {
+    margin-bottom: 15px;
+}
+
+/* Стили для панели администратора */
+.admin-options {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.admin-btn {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.admin-btn:hover {
+    background-color: #2980b9;
+}
+
+.admin-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.data-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.employee-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.employee-controls input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.employee-controls button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#register-btn {
+    background-color: #2ecc71;
+    color: white;
+}
+
+#delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+#employee-requests {
+    display: block !important; /* Переопределяем скрытие */
+    background-color: #9b59b6;
+    color: white;
+}
+
+/* Стили для вкладок */
+.auth-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+    border-bottom: 2px solid #3498db;
+    font-weight: bold;
+}
+
+/* Стили для форм аутентификации */
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.modal-content {
+    max-width: 800px;
+}
+
+.service-document {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.service-document h3 {
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.services-details {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 3px;
+}
+
+#selected-services-list {
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px dashed #ccc;
+}
+
+#client-select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+.selected-service-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    margin: 5px 0;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+#service-document-modal .modal-content {
+    max-width: 600px;
+}
+
+#services-list-modal .modal-content {
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#create-service-btn {
+    background-color: #2ecc71; /* Зеленый цвет */
+    color: white;
+    display: none; /* По умолчанию скрыта */
+}
+
+#create-service-btn:hover {
+    background-color: #27ae60; /* Темно-зеленый при наведении */
+}
+
+.employee-only {
+    display: none; /* Скрываем все кнопки для сотрудников по умолчанию */
+}
+
+/* Стили для результатов поиска */
+.search-results {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.search-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.search-section h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
+}
+
+.search-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.search-section li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.search-section li:last-child {
+    border-bottom: none;
+}
